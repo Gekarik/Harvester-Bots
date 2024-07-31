@@ -1,8 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(UnitManager))]
+[RequireComponent(typeof(UnitManager),typeof(Scaner))]
 public class Base : MonoBehaviour
 {
+    [SerializeField] private Storage _storage;
+
     private Scaner _scaner;
     private UnitManager _unitManager;
 
@@ -25,5 +27,6 @@ public class Base : MonoBehaviour
     private void NotifyUnits(Resource resource)
     {
         _unitManager.AppointUnit(resource);
+        resource.SetStatus(Statuses.ResourceStatuses.HasSender);
     }
 }

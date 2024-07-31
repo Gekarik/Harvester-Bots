@@ -5,9 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
-    public Action OnMoveComplete;
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private const float Inaccuracy = 0.15f;
+
+    public event Action OnMoveComplete;
+
     private Vector3 _startPosition;
     private Rigidbody _rigidbody;
 
@@ -15,16 +17,18 @@ public class Mover : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _startPosition = transform.position;
+        _rigidbody.isKinematic = true;
     }
 
-    public void StartMoveSequence(Vector3 targetPosition)
+    public void StartMoveSequence(Vector3 targetPosition, Vector3 homePosition)
     {
-        StartCoroutine(MoveSequence(targetPosition));
+        StartCoroutine(MoveSequence(targetPosition, homePosition));
     }
 
-    private IEnumerator MoveSequence(Vector3 targetPosition)
+    private IEnumerator MoveSequence(Vector3 targetPosition, Vector3 homePosition)
     {
         yield return MoveToPosition(targetPosition);
+        yield return MoveToPosition(homePosition);
         yield return MoveToPosition(_startPosition);
         OnMoveComplete?.Invoke();
     }
@@ -35,7 +39,8 @@ public class Mover : MonoBehaviour
 
         while (Vector3.Distance(_rigidbody.position, position) > Inaccuracy)
         {
-            _rigidbody.MovePosition(Vector3.MoveTowards(_rigidbody.position, position, _moveSpeed * Time.deltaTime));
+            Vector3 direction = (position - _rigidbody.position).normalized;
+            _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.deltaTime);
             yield return null;
         }
     }

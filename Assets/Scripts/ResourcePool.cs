@@ -7,22 +7,10 @@ public class ResourcePool : MonoBehaviour
     [SerializeField] private List<Resource> _resourcePrefabs;
 
     private Queue<Resource> _resourcesPool;
-    private static ResourcePool _instance;
 
     private void Awake()
     {
         _resourcesPool = new Queue<Resource>();
-    }
-
-    public static ResourcePool Instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = FindObjectOfType<ResourcePool>();
-
-            return _instance;
-        }
     }
 
     public Resource GetObject()
@@ -31,6 +19,7 @@ public class ResourcePool : MonoBehaviour
         {
             var resource = Instantiate(_resourcePrefabs[Random.Range(0, _resourcePrefabs.Count)]);
             resource.transform.parent = _container;
+            resource.OnCollected += PutObject;
 
             return resource;
         }
@@ -40,12 +29,8 @@ public class ResourcePool : MonoBehaviour
 
     public void PutObject(Resource resource)
     {
+        resource.OnCollected -= PutObject;
         _resourcesPool.Enqueue(resource);
         resource.gameObject.SetActive(false);
-    }
-
-    public void Reset()
-    {
-        _resourcesPool.Clear();
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Scaner : MonoBehaviour
 {
-    public Action<Resource> OnFoundResource;
+    public event Action<Resource> OnFoundResource;
 
-    [SerializeField] private float _scanRadius = 50f;
-    [SerializeField] private float _scanPeriod = 5f;
+    [SerializeField] private float _scanRadius;
+    [SerializeField] private float _scanPeriod;
     [SerializeField] private LayerMask _resourceLayer;
 
     private void Start()
@@ -21,15 +21,15 @@ public class Scaner : MonoBehaviour
 
         while (true)
         {
+            yield return wait;
+
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, _scanRadius, _resourceLayer);
 
             foreach (Collider hitCollider in hitColliders)
             {
-                if (hitCollider.TryGetComponent(out Resource resource) && resource.Status == Resource.Statuses.Free)
+                if (hitCollider.TryGetComponent(out Resource resource) && resource.Status == Statuses.ResourceStatuses.Free)
                     OnFoundResource?.Invoke(resource);
             }
-
-            yield return wait;
         }
     }
 }

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d9edad5e4e65d48a1753b7da21cd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _holdPoint: {fileID: 7338263408370300643}
+  _holdPoint: {fileID: 1387473931690260300}
 --- !u!1001 &5295433710091477647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,6 +185,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3113876142200232307}
   m_SourcePrefab: {fileID: 100100000, guid: 7ef4f5cb861fc534e89e5ff84dcfb504, type: 3}
+--- !u!4 &1387473931690260300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 7ef4f5cb861fc534e89e5ff84dcfb504, type: 3}
+  m_PrefabInstance: {fileID: 5295433710091477647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1958302666782532541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3292024669512384206, guid: 7ef4f5cb861fc534e89e5ff84dcfb504, type: 3}
@@ -234,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375681cb1e788df4792ca22294da2f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
+  _moveSpeed: 10
 --- !u!114 &782511121628836237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bf857d6d106784a9c90766c31cd034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _grabber: {fileID: 4046812192078467612}
 --- !u!136 &3113876142200232307
 CapsuleCollider:
   m_ObjectHideFlags: 0

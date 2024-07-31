@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class ScoreCounter : MonoBehaviour
 {
-    public Action OnScoreChange;
-    [SerializeField] private ResourceRemover _resourceRemover;
+    [SerializeField] private Storage _storage;
+
+    public event Action OnScoreChange;
+
     public int Score { get; private set; } = 0;
 
     private void OnEnable()
     {
-        _resourceRemover.ResourceCollected += Add;
+        _storage.OnResourceCollected += Add;
     }
 
     private void OnDisable()
     {
-        _resourceRemover.ResourceCollected -= Add;
+        _storage.OnResourceCollected -= Add;
     }
 
     private void Add()

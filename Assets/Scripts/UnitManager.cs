@@ -10,11 +10,13 @@ public class UnitManager : MonoBehaviour
 
     private Base _home;
     private List<Unit> _unitList;
+    private BoxCollider _spawnArea;
 
     private void Start()
     {
         _unitList = new List<Unit>();
         _home = GetComponent<Base>();
+        _spawnArea = _spawnPoint.GetComponent<BoxCollider>();
         SpawnUnits();
     }
 
@@ -22,31 +24,31 @@ public class UnitManager : MonoBehaviour
     {
         foreach (var unit in _unitList)
         {
-            if (unit.Status == Unit.Statuses.Free)
+            if (unit.Status == Statuses.UnitStatuses.Free)
             {
-                resource.UpdateStatus(Resource.Statuses.HasSender);
-                unit.OnTargetChange(resource.transform.position);
+                unit.OnTargetChange(resource);
                 return;
             }
         }
     }
 
-    private Vector3 CalculateOffset()
+    private Vector3 CalculatePosition()
     {
-        var _random = new System.Random();
-        var offsetX = _random.Next(0, 3);
-        var offsetZ = _random.Next(0, 3);
-        var offset = new Vector3(offsetX, 0, offsetZ);
+        Bounds bounds = _spawnArea.bounds;
 
-        return offset;
+        return new Vector3(
+            UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
+            UnityEngine.Random.Range(bounds.min.y, bounds.max.y),
+            UnityEngine.Random.Range(bounds.min.z, bounds.max.z)
+        );
     }
 
     private void SpawnUnits()
     {
         for (int i = 0; i < MaxUnitCount; i++)
         {
-            var offset = CalculateOffset();
-            var unit = Instantiate(_unitPrefab, _spawnPoint.position + offset, Quaternion.identity);
+            var position = CalculatePosition();
+            var unit = Instantiate(_unitPrefab, position, Quaternion.identity);
 
             unit.transform.SetParent(transform, true);
             unit.SetHome(_home);

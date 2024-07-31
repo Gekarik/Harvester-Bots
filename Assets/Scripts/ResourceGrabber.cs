@@ -4,14 +4,17 @@ using UnityEngine;
 public class ResourceGrabber : MonoBehaviour
 {
     [SerializeField] private Transform _holdPoint;
+    private Resource _targetResource;
+
+    public void SetTargetResource(Resource resource)
+    {
+        _targetResource = resource;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Resource resource) && resource.Status == Resource.Statuses.HasSender)
-        {
+        if (other.TryGetComponent(out Resource resource) && resource == _targetResource)
             Grab(resource);
-            resource.UpdateStatus(Resource.Statuses.Grabbed);
-        }
     }
 
     private void Grab(Resource resource)
@@ -20,7 +23,7 @@ public class ResourceGrabber : MonoBehaviour
         resource.transform.position = _holdPoint.position;
         resource.transform.rotation = _holdPoint.rotation;
 
-        if (resource.TryGetComponent(out Rigidbody rb))
-            rb.isKinematic = true;
+        if (resource.TryGetComponent(out Rigidbody rigidbody))
+            rigidbody.isKinematic = true;
     }
 }

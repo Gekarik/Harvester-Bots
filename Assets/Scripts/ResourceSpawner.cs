@@ -4,8 +4,8 @@ using UnityEngine;
 public class ResourceSpawner : MonoBehaviour
 {
     [SerializeField] private ResourcePool _pool;
-    [SerializeField] private float _spawnPeriod = 5f;
     [SerializeField] private BoxCollider _spawnArea;
+    [SerializeField] private float _spawnPeriod;
 
     private void Start()
     {
