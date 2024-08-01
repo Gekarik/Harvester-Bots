@@ -4,12 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Resource : MonoBehaviour
 {
-    public event Action<Resource> OnCollected;
+    public event Action<Resource> Collected;
 
-    public Statuses.ResourceStatuses Status { get; private set; } = Statuses.ResourceStatuses.Free;
-
-    public void SetStatus(Statuses.ResourceStatuses status)
-    {
-        Status = status;
-    }
+    public void Collect() => Collected?.Invoke(this);
 }

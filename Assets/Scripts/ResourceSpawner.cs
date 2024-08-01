@@ -19,12 +19,12 @@ public class ResourceSpawner : MonoBehaviour
         while (true)
         {
             var resource = _pool.GetObject();
-            resource.transform.position = CalculatePosition();
+            resource.transform.position = RandomPosition();
             yield return wait;
         }
     }
 
-    private Vector3 CalculatePosition()
+    private Vector3 RandomPosition()
     {
         Bounds bounds = _spawnArea.bounds;
         return new Vector3(

@@ -823,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pool: {fileID: 1727113007}
   _spawnArea: {fileID: 1980993301}
-  _spawnPeriod: 1
+  _spawnPeriod: 0.8
 --- !u!4 &1321578547
 Transform:
   m_ObjectHideFlags: 0
@@ -987,6 +987,7 @@ GameObject:
   - component: {fileID: 1673630104}
   - component: {fileID: 1673630103}
   - component: {fileID: 1673630110}
+  - component: {fileID: 1673630111}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1156,6 +1157,27 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &1673630111
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673630102}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1697196287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1315,7 @@ MonoBehaviour:
   _container: {fileID: 793549150}
   _resourcePrefabs:
   - {fileID: 8388172058464143939, guid: 132c456679ce91b4ea2cb91087f69df7, type: 3}
+  _storage: {fileID: 912718722}
 --- !u!4 &1727113008
 Transform:
   m_ObjectHideFlags: 0
@@ -1487,6 +1510,10 @@ PrefabInstance:
       propertyPath: _storage
       value: 
       objectReference: {fileID: 912718722}
+    - target: {fileID: 8652305394775219983, guid: 58bdd7610e732f8478aa0c2d4b69c629, type: 3}
+      propertyPath: <MaxUnitCount>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

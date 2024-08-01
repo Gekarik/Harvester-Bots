@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class ScoreViewer : MonoBehaviour
 {
     [SerializeField] private ScoreCounter _scoreCounter;
@@ -8,12 +9,12 @@ public class ScoreViewer : MonoBehaviour
 
     private void OnEnable()
     {
-        _scoreCounter.OnScoreChange += ViewScore;
+        _scoreCounter.ScoreChange += ViewScore;
     }
 
     private void OnDisable()
     {
-        _scoreCounter.OnScoreChange -= ViewScore;
+        _scoreCounter.ScoreChange -= ViewScore;
     }
 
     private void Start()

@@ -1,35 +1,26 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Scaner : MonoBehaviour
+public class Scanner : MonoBehaviour
 {
-    public event Action<Resource> OnFoundResource;
-
     [SerializeField] private float _scanRadius;
     [SerializeField] private float _scanPeriod;
     [SerializeField] private LayerMask _resourceLayer;
 
-    private void Start()
-    {
-        StartCoroutine(nameof(ScanResources));
-    }
+    public event Action<List<Resource>> ResourceFounded;
 
-    public IEnumerator ScanResources()
+    public void ScanForResources()
     {
-        WaitForSeconds wait = new WaitForSeconds(_scanPeriod);
+        var foundedResources = new List<Resource>();
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _scanRadius, _resourceLayer);
 
-        while (true)
+        foreach (Collider hitCollider in hitColliders)
         {
-            yield return wait;
+            if (hitCollider.TryGetComponent(out Resource resource))
+                foundedResources.Add(resource);
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _scanRadius, _resourceLayer);
-
-            foreach (Collider hitCollider in hitColliders)
-            {
-                if (hitCollider.TryGetComponent(out Resource resource) && resource.Status == Statuses.ResourceStatuses.Free)
-                    OnFoundResource?.Invoke(resource);
-            }
+            ResourceFounded?.Invoke(foundedResources);
         }
     }
 }
