@@ -12,11 +12,6 @@ public class ResourceGrabber : MonoBehaviour
             Grab(resource);
     }
 
-    public void SetTargetResource(Resource resource)
-    {
-        _targetResource = resource;
-    }
-
     private void Grab(Resource resource)
     {
         resource.transform.SetParent(_holdPoint);
@@ -24,5 +19,10 @@ public class ResourceGrabber : MonoBehaviour
 
         if (resource.TryGetComponent(out Rigidbody rigidbody))
             rigidbody.isKinematic = true;
+    }
+
+    public void SetTargetResource(Resource resource)
+    {
+        _targetResource = resource;
     }
 }

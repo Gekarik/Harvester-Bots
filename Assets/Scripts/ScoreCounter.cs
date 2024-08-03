@@ -24,4 +24,13 @@ public class ScoreCounter : MonoBehaviour
         Score++;
         ScoreChange?.Invoke();
     }
+
+    public void Remove(int amount)
+    {
+        if (amount > 0)
+        {
+            Score -= amount;
+            ScoreChange?.Invoke();
+        }
+    }
 }

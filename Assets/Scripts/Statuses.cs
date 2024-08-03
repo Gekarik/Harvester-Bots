@@ -14,4 +14,10 @@ public class Statuses : MonoBehaviour
         Free = 0,
         Busy
     };
+
+    public enum BaseMode 
+    {
+        SpawnUnits = 0,
+        CreateNewBase
+    };
 }

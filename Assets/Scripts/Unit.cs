@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(Animator))]
 public class Unit : MonoBehaviour
 {
     [SerializeField] private ResourceGrabber _grabber;
+    [SerializeField] private Base _basePrefab;
 
     private Base _homeBase;
     private Mover _mover;
@@ -40,6 +42,16 @@ public class Unit : MonoBehaviour
     public void SetHome(Base home)
     {
         _homeBase = home;
+    }
+
+    public IEnumerator CreateBase(Flag flag)
+    {
+        Status = Statuses.UnitStatuses.Busy;
+        _animator.SetBool(AnimatorPlayerController.Params.Run, true);
+        yield return StartCoroutine(_mover.MoveToPosition(flag.transform.position));
+        var home = Instantiate(_basePrefab, flag.transform.position, Quaternion.identity);
+        _homeBase = home;
+        Status = Statuses.UnitStatuses.Free;
     }
 
     private void HandleCompleteMovement()

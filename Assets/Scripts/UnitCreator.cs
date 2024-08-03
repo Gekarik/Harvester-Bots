@@ -1,9 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class UnitCreator : MonoBehaviour
 {
     [SerializeField] private Unit _unitPrefab;
-    [SerializeField] private Transform _spawnPoint;
 
     private Base _home;
     private BoxCollider _spawnArea;
@@ -11,7 +11,7 @@ public class UnitCreator : MonoBehaviour
     private void Awake()
     {
         _home = GetComponent<Base>();
-        _spawnArea = _spawnPoint.GetComponent<BoxCollider>();
+        _spawnArea = GetComponent<BoxCollider>();
     }
 
     private Vector3 RandomPosition()
@@ -20,7 +20,7 @@ public class UnitCreator : MonoBehaviour
 
         return new Vector3(
             Random.Range(bounds.min.x, bounds.max.x),
-            Random.Range(bounds.min.y, bounds.max.y),
+            Random.Range(0, 0),
             Random.Range(bounds.min.z, bounds.max.z)
         );
     }

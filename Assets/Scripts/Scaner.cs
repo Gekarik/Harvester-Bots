@@ -5,7 +5,6 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     [SerializeField] private float _scanRadius;
-    [SerializeField] private float _scanPeriod;
     [SerializeField] private LayerMask _resourceLayer;
 
     public event Action<List<Resource>> ResourceFounded;

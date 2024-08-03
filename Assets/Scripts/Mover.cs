@@ -11,13 +11,11 @@ public class Mover : MonoBehaviour
 
     public event Action OnMoveComplete;
 
-    private Vector3 _startPosition;
     private Rigidbody _rigidbody;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _startPosition = transform.position;
         _rigidbody.isKinematic = true;
     }
 
@@ -26,15 +24,7 @@ public class Mover : MonoBehaviour
         StartCoroutine(MoveSequence(targetPosition, homePosition));
     }
 
-    private IEnumerator MoveSequence(Vector3 targetPosition, Vector3 homePosition)
-    {
-        yield return MoveToPosition(targetPosition);
-        yield return MoveToPosition(homePosition);
-        yield return MoveToPosition(_startPosition);
-        OnMoveComplete?.Invoke();
-    }
-
-    private IEnumerator MoveToPosition(Vector3 position)
+    public IEnumerator MoveToPosition(Vector3 position)
     {
         transform.LookAt(position);
 
@@ -44,5 +34,12 @@ public class Mover : MonoBehaviour
             _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    private IEnumerator MoveSequence(Vector3 targetPosition, Vector3 homePosition)
+    {
+        yield return MoveToPosition(targetPosition);
+        yield return MoveToPosition(homePosition);
+        OnMoveComplete?.Invoke();
     }
 }
