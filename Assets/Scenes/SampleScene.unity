@@ -367,7 +367,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 436696499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4e7cdf4cf5e9444bbc84ff56ff0ad42, type: 3}
+  m_Script: {fileID: 11500000, guid: 913c4ce8074c2aa4a93d2e56899d91db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &695514827
@@ -810,7 +810,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.248309, g: 0.3718702, b: 0.5660378, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -875,12 +875,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13554b0522fb28d4294e26a74a174d4d, type: 3}
+  m_Script: {fileID: 11500000, guid: a4e310ca5cbc74b49880bf814f82f4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _flagPrefab: {fileID: 8817553705534149502, guid: cf40085cbfc70fc42a99df99059ca945, type: 3}
-  _base: {fileID: 0}
-  _isBaseClicked: 0
 --- !u!1 &1098087468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1883764014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5463bb43ca8a6a4097dc94222473956, type: 3}
+  m_Script: {fileID: 11500000, guid: 861678c9473452f41ad8bbc8dc9d3862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1980993300

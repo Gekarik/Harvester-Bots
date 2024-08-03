@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(UnitCreator),typeof(ScoreCounter))]
+[RequireComponent(typeof(UnitCreator), typeof(ScoreCounter))]
 
 public class Base : MonoBehaviour
 {
     [SerializeField] private UnitCreator _unitCreator;
 
-    private ResourceManager _resourceManager;
-    private Scanner _scanner;
-    private ScoreCounter _scoreCounter;
-    private FlagPlanter _flagPlanter;
     private List<Unit> _unitList;
     private Flag _currentFlag;
     private Statuses.BaseMode _mode;
+
+    private Scanner _scanner;
+    private FlagPlanter _flagPlanter;
+    private ScoreCounter _scoreCounter;
+    private ResourceManager _resourceManager;
 
     [field: SerializeField] public int MaxUnitCount { get; private set; }
 
@@ -49,10 +50,10 @@ public class Base : MonoBehaviour
     private void Update()
     {
         HandleBaseMode();
-        IfTryScanForResources();
+        SearchResources();
     }
 
-    public void TryAssignUnit(Unit unit, Resource resource)
+    public void AssigntUnitToResource(Unit unit, Resource resource)
     {
         if (_resourceManager.TryAssignResource(unit, resource))
             unit.OnTargetChange(resource);
@@ -75,12 +76,12 @@ public class Base : MonoBehaviour
 
             case Statuses.BaseMode.CreateNewBase when _scoreCounter.Score >= 5 && TryGetFreeUnit(out Unit unit):
                 _scoreCounter.Remove(5);
-                StartCoroutine(AssignUnit(unit, _currentFlag));
+                StartCoroutine(AssigntUnitToBaseBuilding(unit, _currentFlag));
                 break;
         }
     }
 
-    private void IfTryScanForResources()
+    private void SearchResources()
     {
         if (TryGetFreeUnit(out Unit freeUnit))
             _scanner.ScanForResources();
@@ -100,11 +101,11 @@ public class Base : MonoBehaviour
         foreach (var resource in resources)
         {
             if (TryGetFreeUnit(out Unit unit))
-                TryAssignUnit(unit, resource);
+                AssigntUnitToResource(unit, resource);
         }
     }
 
-    private IEnumerator AssignUnit(Unit unit, Flag flag)
+    private IEnumerator AssigntUnitToBaseBuilding(Unit unit, Flag flag)
     {
         yield return StartCoroutine(unit.CreateBase(flag));
         Destroy(flag.gameObject);

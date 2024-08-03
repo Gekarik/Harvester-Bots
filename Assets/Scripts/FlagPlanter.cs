@@ -11,11 +11,12 @@ public class FlagPlanter : MonoBehaviour
     private Ray _ray;
     private Base _base;
     private bool _isBaseClicked = false;
+    private InputReader _inputReader = new();
     private Dictionary<Base, Flag> _baseToFlag = new();
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_inputReader.LeftClick())
         {
             if (_isBaseClicked == false)
                 IsBaseClicked();

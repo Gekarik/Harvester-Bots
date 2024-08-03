@@ -48,7 +48,9 @@ public class Unit : MonoBehaviour
     {
         Status = Statuses.UnitStatuses.Busy;
         _animator.SetBool(AnimatorPlayerController.Params.Run, true);
+        
         yield return StartCoroutine(_mover.MoveToPosition(flag.transform.position));
+
         var home = Instantiate(_basePrefab, flag.transform.position, Quaternion.identity);
         _homeBase = home;
         Status = Statuses.UnitStatuses.Free;
