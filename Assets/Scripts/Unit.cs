@@ -44,18 +44,6 @@ public class Unit : MonoBehaviour
         _homeBase = home;
     }
 
-    public IEnumerator CreateBase(Flag flag)
-    {
-        Status = Statuses.UnitStatuses.Busy;
-        _animator.SetBool(AnimatorPlayerController.Params.Run, true);
-        
-        yield return StartCoroutine(_mover.MoveToPosition(flag.transform.position));
-
-        var home = Instantiate(_basePrefab, flag.transform.position, Quaternion.identity);
-        _homeBase = home;
-        Status = Statuses.UnitStatuses.Free;
-    }
-
     private void HandleCompleteMovement()
     {
         _animator.SetBool(AnimatorPlayerController.Params.Run, false);

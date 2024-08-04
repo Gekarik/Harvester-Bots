@@ -241,7 +241,6 @@ GameObject:
   - component: {fileID: 436696501}
   - component: {fileID: 436696500}
   - component: {fileID: 436696504}
-  - component: {fileID: 436696505}
   m_Layer: 0
   m_Name: PlayingField
   m_TagString: Untagged
@@ -358,18 +357,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 0, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &436696505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436696499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 913c4ce8074c2aa4a93d2e56899d91db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &695514827
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,51 +788,6 @@ Transform:
   - {fileID: 1697196288}
   m_Father: {fileID: 436696503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1495975919
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1495975921}
-  - component: {fileID: 1495975920}
-  m_Layer: 0
-  m_Name: FlagPlanter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1495975920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495975919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4e310ca5cbc74b49880bf814f82f4fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flagPrefab: {fileID: 8817553705534149502, guid: cf40085cbfc70fc42a99df99059ca945, type: 3}
---- !u!4 &1495975921
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495975919}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.6925, y: -39.232647, z: 6.5233326}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1508697695 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3961680608312754211, guid: 2cb84462a9b62594082d90a0861d70a2, type: 3}
@@ -1192,5 +1134,4 @@ SceneRoots:
   - {fileID: 436696503}
   - {fileID: 7488475536578015057}
   - {fileID: 6244807050192047560}
-  - {fileID: 1495975921}
   - {fileID: 6878627886791119393}
