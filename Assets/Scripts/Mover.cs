@@ -8,10 +8,10 @@ public class Mover : MonoBehaviour
     private const float Inaccuracy = 0.15f;
 
     [SerializeField] private float _moveSpeed = 1f;
-
-    public event Action OnMoveComplete;
-
+    
     private Rigidbody _rigidbody;
+
+    public event Action MovingCompleted;
 
     private void Awake()
     {
@@ -40,6 +40,6 @@ public class Mover : MonoBehaviour
     {
         yield return MoveToPosition(targetPosition);
         yield return MoveToPosition(homePosition);
-        OnMoveComplete?.Invoke();
+        MovingCompleted?.Invoke();
     }
 }

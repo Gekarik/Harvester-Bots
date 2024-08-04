@@ -21,12 +21,12 @@ public class Unit : MonoBehaviour
 
     private void OnEnable()
     {
-        _mover.OnMoveComplete += HandleCompleteMovement;
+        _mover.MovingCompleted += HandleCompleteMovement;
     }
 
     private void OnDisable()
     {
-        _mover.OnMoveComplete -= HandleCompleteMovement;
+        _mover.MovingCompleted -= HandleCompleteMovement;
     }
 
     public void OnTargetChange(Resource resource)
