@@ -35,7 +35,10 @@ public class ResourcePool : MonoBehaviour
             return resource;
         }
 
-        return _resourcesPool.Dequeue();
+        var res = _resourcesPool.Dequeue();
+
+        res.gameObject.SetActive(true);
+        return res;
     }
 
     public void PutObject(Resource resource)

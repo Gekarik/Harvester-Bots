@@ -5,7 +5,7 @@ public class ResourceManager : MonoBehaviour
 {
     private Dictionary<Resource, Unit> _unitToResource = new Dictionary<Resource, Unit>();
 
-    public bool TryAssignResource(Unit unit,Resource resource)
+    public bool TryAssignResource(Unit unit, Resource resource)
     {
         if (_unitToResource.ContainsKey(resource))
             return false;

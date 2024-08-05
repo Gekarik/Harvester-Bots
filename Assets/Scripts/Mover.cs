@@ -24,11 +24,13 @@ public class Mover : MonoBehaviour
         StartCoroutine(MoveSequence(targetPosition, homePosition));
     }
 
-    public IEnumerator MoveToPosition(Vector3 position)
+    private IEnumerator MoveToPosition(Vector3 position)
     {
         transform.LookAt(position);
 
-        while (Vector3.Distance(_rigidbody.position, position) > Inaccuracy)
+        float inaccuracySquared = Inaccuracy * Inaccuracy; 
+
+        while ((position - _rigidbody.position).sqrMagnitude > inaccuracySquared)
         {
             Vector3 direction = (position - _rigidbody.position).normalized;
             _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.deltaTime);

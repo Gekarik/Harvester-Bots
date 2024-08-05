@@ -8,8 +8,6 @@ public class Resource : MonoBehaviour
     private Collider _collider;
     public event Action<Resource> Collected;
 
-    public void Collect() => Collected?.Invoke(this);
-
     private void Awake()
     {
         _collider = GetComponent<Collider>();
@@ -17,4 +15,6 @@ public class Resource : MonoBehaviour
         _collider.isTrigger = true;
         _rigidbody.useGravity = false;
     }
+
+    public void Collect() => Collected?.Invoke(this);
 }

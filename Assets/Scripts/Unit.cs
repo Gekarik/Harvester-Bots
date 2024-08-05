@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover), typeof(Animator))]
@@ -10,7 +9,6 @@ public class Unit : MonoBehaviour
     private Base _homeBase;
     private Mover _mover;
     private Animator _animator;
-    private Resource _targetResource;
     public Statuses.UnitStatuses Status { get; private set; } = Statuses.UnitStatuses.Free;
 
     private void Awake()
@@ -21,20 +19,19 @@ public class Unit : MonoBehaviour
 
     private void OnEnable()
     {
-        _mover.MovingCompleted += HandleCompleteMovement;
+        _mover.MovingCompleted += OnMovingCompleted;
     }
 
     private void OnDisable()
     {
-        _mover.MovingCompleted -= HandleCompleteMovement;
+        _mover.MovingCompleted -= OnMovingCompleted;
     }
 
-    public void OnTargetChange(Resource resource)
+    public void AssignResource(Resource resource)
     {
-        _targetResource = resource;
         Status = Statuses.UnitStatuses.Busy;
 
-        _grabber.SetTargetResource(_targetResource);
+        _grabber.SetTargetResource(resource);
         _mover.StartMoveSequence(resource.transform.position, _homeBase.transform.position);
         _animator.SetBool(AnimatorPlayerController.Params.Run, true);
     }
@@ -44,7 +41,7 @@ public class Unit : MonoBehaviour
         _homeBase = home;
     }
 
-    private void HandleCompleteMovement()
+    private void OnMovingCompleted()
     {
         _animator.SetBool(AnimatorPlayerController.Params.Run, false);
         Status = Statuses.UnitStatuses.Free;

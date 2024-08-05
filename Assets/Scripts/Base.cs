@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +9,6 @@ public class Base : MonoBehaviour
     [SerializeField] private ResourceManager _resourceManager;
 
     private List<Unit> _unitList;
-    private Statuses.BaseMode _mode;
-
     private Scanner _scanner;
 
     [field: SerializeField] public int MaxUnitCount { get; private set; }
@@ -21,17 +17,6 @@ public class Base : MonoBehaviour
     {
         _scanner = GetComponent<Scanner>();
         _unitList = new List<Unit>(MaxUnitCount);
-        _mode = Statuses.BaseMode.SpawnUnits;
-    }
-
-    private void OnEnable()
-    {
-        _scanner.ResourceFounded += OnResourcesFound;
-    }
-
-    private void OnDisable()
-    {
-        _scanner.ResourceFounded -= OnResourcesFound;
     }
 
     private void Start()
@@ -41,34 +26,25 @@ public class Base : MonoBehaviour
 
     private void Update()
     {
-        SearchResources();
+        if (TryGetFreeUnit(out Unit unit))
+            AssignResource(unit);
     }
 
-    public void AssigntUnitToResource(Unit unit, Resource resource)
+    private void AssignResource(Unit unit)
     {
-        if (_resourceManager.TryAssignResource(unit, resource))
-            unit.OnTargetChange(resource);
+        var resources = _scanner.ScanResources();
+
+        foreach (var resource in resources)
+        {
+            if (_resourceManager.TryAssignResource(unit, resource))
+                unit.AssignResource(resource);
+        }
     }
 
     private void InitializeUnits()
     {
         for (int i = 0; i < MaxUnitCount; i++)
             _unitList.Add(_unitCreator.Create());
-    }
-
-    private void SearchResources()
-    {
-        if (TryGetFreeUnit(out Unit freeUnit))
-            _scanner.ScanForResources();
-    }
-
-    private void OnResourcesFound(List<Resource> resources)
-    {
-        foreach (var resource in resources)
-        {
-            if (TryGetFreeUnit(out Unit unit))
-                AssigntUnitToResource(unit, resource);
-        }
     }
 
     private bool TryGetFreeUnit(out Unit freeUnit)
