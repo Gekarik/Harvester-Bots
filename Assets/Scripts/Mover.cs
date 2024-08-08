@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
-    private const float Inaccuracy = 0.15f;
+    private const float Inaccuracy = 0.6f;
     private const float InaccuracySquared = Inaccuracy * Inaccuracy;
 
     [SerializeField] private float _moveSpeed = 1f;

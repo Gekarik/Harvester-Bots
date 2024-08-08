@@ -62,8 +62,8 @@ public class Unit : MonoBehaviour
 
     public void SetHome(Base home)
     {
+        transform.SetParent(home.transform, true);
         _homeBase = home;
-        transform.SetParent(home.transform, false);
     }
 
     private void OnMovingCompleted()
