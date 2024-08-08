@@ -4,17 +4,22 @@ using UnityEngine;
 public class ResourceGrabber : MonoBehaviour
 {
     [SerializeField] private Transform _holdPoint;
-    private Resource _targetResource;
+    public Resource TargetResource { get; private set; }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Resource resource) && resource == _targetResource)
+        if (other.TryGetComponent(out Resource resource) && resource == TargetResource)
             Grab(resource);
     }
 
     public void SetTargetResource(Resource resource)
     {
-        _targetResource = resource;
+        TargetResource = resource;
+    }
+
+    public void ClearTarget()
+    {
+        TargetResource = null;
     }
 
     private void Grab(Resource resource)

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 97765965}
   - component: {fileID: 97765964}
   m_Layer: 2
-  m_Name: Wall (2)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 436696501}
   - component: {fileID: 436696500}
   - component: {fileID: 436696504}
+  - component: {fileID: 436696505}
   m_Layer: 0
   m_Name: PlayingField
   m_TagString: Untagged
@@ -357,6 +358,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 0, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &436696505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436696499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913c4ce8074c2aa4a93d2e56899d91db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &695514827
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +383,7 @@ GameObject:
   - component: {fileID: 695514830}
   - component: {fileID: 695514829}
   m_Layer: 2
-  m_Name: Wall (1)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -919,8 +932,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1795135993}
   - {fileID: 1350307331}
+  - {fileID: 1795135993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1508697697
@@ -1101,10 +1114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 1783223600}
+  _resourceManager: {fileID: 1508697697}
   _resourcePrefabs:
   - {fileID: 3579306366732774261, guid: 7d475829688e5d743b6b3836d3b38d4b, type: 3}
   - {fileID: -2636931486222290918, guid: 2e62aef7c3fd4374b8cfa8536e4e16c6, type: 3}
-  _storage: {fileID: 2643805165248212700}
+  - {fileID: -4767145324436344723, guid: 37360cafc3980b144a9c21b039059c68, type: 3}
 --- !u!4 &1795135993
 Transform:
   m_ObjectHideFlags: 0
@@ -1120,6 +1134,51 @@ Transform:
   m_Children:
   - {fileID: 1783223600}
   m_Father: {fileID: 1508697696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2001275802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001275804}
+  - component: {fileID: 2001275803}
+  m_Layer: 0
+  m_Name: FlagPlanter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2001275803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001275802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e310ca5cbc74b49880bf814f82f4fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flagPrefab: {fileID: 8817553705534149502, guid: cf40085cbfc70fc42a99df99059ca945, type: 3}
+--- !u!4 &2001275804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001275802}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.1514206, y: 0, z: -39.376114}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1715931994328196482
 MonoBehaviour:
@@ -1174,17 +1233,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2643805165248212700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1350862280572946478, guid: b19730192d558ac4696845fc35c89616, type: 3}
-  m_PrefabInstance: {fileID: 6244807050192047560}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f61a1c52b02154284bc220e3be02e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6244807050192047560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1242,9 +1290,9 @@ PrefabInstance:
       value: Stronghold
       objectReference: {fileID: 0}
     - target: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
-      propertyPath: _resourceManager
+      propertyPath: <ResourceManager>k__BackingField
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1508697697}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1275,3 +1323,4 @@ SceneRoots:
   - {fileID: 1508697696}
   - {fileID: 6244807050192047560}
   - {fileID: 6878627886791119393}
+  - {fileID: 2001275804}

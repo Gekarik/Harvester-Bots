@@ -7,7 +7,7 @@ public class ScoreCounter : MonoBehaviour
 
     public event Action ScoreChange;
 
-    public int Score { get; private set; } = 0;
+    public int Points { get; private set; } = 0;
 
     private void OnEnable()
     {
@@ -21,7 +21,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void Add(Resource resourec)
     {
-        Score++;
+        Points++;
         ScoreChange?.Invoke();
     }
 
@@ -29,7 +29,7 @@ public class ScoreCounter : MonoBehaviour
     {
         if (amount > 0)
         {
-            Score -= amount;
+            Points -= amount;
             ScoreChange?.Invoke();
         }
     }

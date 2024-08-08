@@ -24,7 +24,7 @@ public class Mover : MonoBehaviour
         StartCoroutine(MoveSequence(targetPosition, homePosition));
     }
 
-    private IEnumerator MoveToPosition(Vector3 position)
+    public IEnumerator MoveToPosition(Vector3 position)
     {
         transform.LookAt(position);
 

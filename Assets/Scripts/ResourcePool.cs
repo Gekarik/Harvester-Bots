@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using System.Resources;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourcePool : MonoBehaviour
 {
+    
     [SerializeField] private Transform _container;
+    [SerializeField] private ResourceManager _resourceManager;
     [SerializeField] private List<Resource> _resourcePrefabs;
-    [SerializeField] private Storage _storage;
 
     private Queue<Resource> _resourcesPool;
 
@@ -14,36 +17,26 @@ public class ResourcePool : MonoBehaviour
         _resourcesPool = new Queue<Resource>();
     }
 
-    private void OnEnable()
-    {
-        _storage.ResourceCollected += PutObject;
-    }
-
-    private void OnDisable()
-    {
-        _storage.ResourceCollected -= PutObject;
-    }
-
     public Resource GetObject()
     {
+        Resource resource;
+
         if (_resourcesPool.Count == 0)
-        {
-            var resource = Instantiate(_resourcePrefabs[Random.Range(0, _resourcePrefabs.Count)]);
-            resource.transform.parent = _container;
-            resource.Collected += PutObject;
+            resource = Instantiate(_resourcePrefabs[Random.Range(0, _resourcePrefabs.Count)]);
+        else
+            resource = _resourcesPool.Dequeue();
 
-            return resource;
-        }
+        resource.transform.parent = _container;
+        resource.Collected += PutObject;
+        resource.gameObject.SetActive(true);
 
-        var res = _resourcesPool.Dequeue();
-
-        res.gameObject.SetActive(true);
-        return res;
+        return resource;
     }
 
     public void PutObject(Resource resource)
     {
         resource.Collected -= PutObject;
+        _resourceManager.RemoveResourceFromData(resource);
         _resourcesPool.Enqueue(resource);
         resource.gameObject.SetActive(false);
     }

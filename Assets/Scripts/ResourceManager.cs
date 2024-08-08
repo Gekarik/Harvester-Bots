@@ -13,4 +13,11 @@ public class ResourceManager : MonoBehaviour
         _unitToResource[resource] = unit;
         return true;
     }
+
+
+    public void RemoveResourceFromData(Resource resource)
+    {
+        if (_unitToResource.ContainsKey(resource))
+            _unitToResource.Remove(resource);
+    }
 }

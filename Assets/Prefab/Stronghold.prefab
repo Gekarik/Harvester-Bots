@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitCreator: {fileID: 1757912511729713251}
+  <ResourceManager>k__BackingField: {fileID: 0}
   <MaxUnitCount>k__BackingField: 3
 --- !u!114 &1757912511729713251
 MonoBehaviour:

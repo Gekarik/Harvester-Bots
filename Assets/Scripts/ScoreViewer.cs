@@ -18,6 +18,6 @@ public class ScoreViewer : MonoBehaviour
 
     private void ViewScore()
     {
-        _textField.text = _scoreCounter.Score.ToString();
+        _textField.text = _scoreCounter.Points.ToString();
     }
 }
