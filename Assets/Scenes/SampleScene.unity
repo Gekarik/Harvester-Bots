@@ -1241,6 +1241,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1022801795704736845, guid: b19730192d558ac4696845fc35c89616, type: 3}
+      propertyPath: _scanRadius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3999478421376071770, guid: b19730192d558ac4696845fc35c89616, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.8
@@ -1288,6 +1292,14 @@ PrefabInstance:
     - target: {fileID: 5905966332921956806, guid: b19730192d558ac4696845fc35c89616, type: 3}
       propertyPath: m_Name
       value: Stronghold
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
+      propertyPath: _priceForBase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
+      propertyPath: _priceForUnit
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
       propertyPath: <ResourceManager>k__BackingField

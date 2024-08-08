@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +5,10 @@ public class FlagPlanter : MonoBehaviour
 {
     [SerializeField] private Flag _flagPrefab;
 
-    private Base _base;
-    private bool _isBaseClicked = false;
-    private InputReader _inputReader = new();
+    private Base _selectedBase;
+    private InputReader _inputReader = new InputReader();
     private Camera _mainCamera;
-    private Dictionary<Base, Flag> _baseToFlag = new();
+    private Dictionary<Base, Flag> _baseToFlag = new Dictionary<Base, Flag>();
 
     private void Awake()
     {
@@ -19,81 +17,62 @@ public class FlagPlanter : MonoBehaviour
 
     private void Update()
     {
-        if (_inputReader.LeftClick())
-        {
-            if (_isBaseClicked == false)
-                IsBaseClicked();
-            else
-                TryPlantFlag();
-        }
+        if (_inputReader.IsLeftButtonClicked())
+            HandleClick();
     }
 
     private void OnFlagDestroy(Flag flag)
     {
-        Base toDelete = null;
-
         foreach (var pair in _baseToFlag)
         {
             if (pair.Value == flag)
             {
-                toDelete = pair.Key;
+                flag.Destroyed -= OnFlagDestroy;
+                _baseToFlag.Remove(pair.Key);
                 break;
             }
         }
-
-        if (toDelete != null)
-        {
-            flag.Destroyed -= OnFlagDestroy;
-            _baseToFlag.Remove(toDelete);
-        }
     }
 
-    private void TryPlantFlag()
+    private void HandleBase(Base clickedBase)
+    {
+        _selectedBase = clickedBase;
+        Debug.Log("База выбрана");
+    }
+
+    private void HandleClick()
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            if (hit.collider.TryGetComponent(out PlayingField playingField))
+            if (hit.collider.TryGetComponent(out Base clickedBase))
             {
-                if (_baseToFlag.ContainsKey(_base))
-                {
-                    var flag = _baseToFlag[_base];
-                    flag.transform.position = hit.point;
-                    _base.SetFlag(flag);
-                }
-                else
-                {
-                    var flag = Instantiate(_flagPrefab, hit.point, Quaternion.identity);
-                    _baseToFlag[_base] = flag;
-                    flag.Destroyed += OnFlagDestroy;
-                    _base.SetFlag(flag);
-                }
+                HandleBase(clickedBase);
+            }
+            else if (hit.collider.TryGetComponent(out PlayingField playingField))
+            {
+                TryPlantFlag(hit.point);
+                _selectedBase = null;
             }
         }
-
-        _base = null;
-        _isBaseClicked = false;
     }
 
-    private void IsBaseClicked()
+    private void TryPlantFlag(Vector3 hitPoint)
     {
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        if (_selectedBase != null)
         {
-
-            if (hit.collider.TryGetComponent(out Base _base))
+            if (_baseToFlag.TryGetValue(_selectedBase, out Flag existingFlag))
             {
-                _isBaseClicked = true;
-                this._base = _base;
-                Debug.Log("База выбрана");
+                existingFlag.transform.position = hitPoint;
             }
             else
             {
-                _isBaseClicked = false;
-                Debug.Log("База невыбрана");
+                var newFlag = Instantiate(_flagPrefab, hitPoint, Quaternion.identity);
+                newFlag.Destroyed += OnFlagDestroy;
+                _baseToFlag[_selectedBase] = newFlag;
             }
+            _selectedBase.SetFlag(_baseToFlag[_selectedBase]);
         }
     }
 }

@@ -39,13 +39,12 @@ public class Unit : MonoBehaviour
         _animator.SetBool(AnimatorPlayerController.Params.Run, true);
     }
 
-    public IEnumerator Build(Flag flag)
+    private IEnumerator Build(Flag flag)
     {
         Status = Statuses.UnitStatuses.Busy;
         var homePlace = flag.transform.position;
-        
-        _animator.SetBool(AnimatorPlayerController.Params.Run, true);
 
+        _animator.SetBool(AnimatorPlayerController.Params.Run, true);
         yield return _mover.MoveToPosition(homePlace);
 
         var home = Instantiate(_basePrefab, homePlace, Quaternion.identity);
@@ -57,7 +56,8 @@ public class Unit : MonoBehaviour
 
     public void AssignBuilding(Flag flag)
     {
-        StartCoroutine(Build(flag));
+        if (flag != null)
+            StartCoroutine(Build(flag));
     }
 
     public void SetHome(Base home)

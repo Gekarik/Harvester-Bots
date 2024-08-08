@@ -6,9 +6,10 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     private const float Inaccuracy = 0.15f;
+    private const float InaccuracySquared = Inaccuracy * Inaccuracy;
 
     [SerializeField] private float _moveSpeed = 1f;
-    
+
     private Rigidbody _rigidbody;
 
     public event Action MovingCompleted;
@@ -28,9 +29,7 @@ public class Mover : MonoBehaviour
     {
         transform.LookAt(position);
 
-        float inaccuracySquared = Inaccuracy * Inaccuracy; 
-
-        while ((position - _rigidbody.position).sqrMagnitude > inaccuracySquared)
+        while ((position - _rigidbody.position).sqrMagnitude > InaccuracySquared)
         {
             Vector3 direction = (position - _rigidbody.position).normalized;
             _rigidbody.MovePosition(_rigidbody.position + direction * _moveSpeed * Time.deltaTime);
