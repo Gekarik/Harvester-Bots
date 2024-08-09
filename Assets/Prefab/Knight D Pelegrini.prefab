@@ -1303,6 +1303,7 @@ GameObject:
   - component: {fileID: 348560054513837793}
   - component: {fileID: 782511121628836237}
   - component: {fileID: 3113876142200232307}
+  - component: {fileID: 7115832377049002575}
   m_Layer: 0
   m_Name: Knight D Pelegrini
   m_TagString: Untagged
@@ -1404,7 +1405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grabber: {fileID: 4046812192078467612}
-  _basePrefab: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
 --- !u!136 &3113876142200232307
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1428,6 +1428,19 @@ CapsuleCollider:
   m_Height: 2.23
   m_Direction: 1
   m_Center: {x: 0, y: 1.18, z: 0}
+--- !u!114 &7115832377049002575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024962987671986142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5cc97b8434300247ba9907229ef3587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _basePrefab: {fileID: 6785781658051706249, guid: b19730192d558ac4696845fc35c89616, type: 3}
 --- !u!1 &5077853091253812357
 GameObject:
   m_ObjectHideFlags: 0

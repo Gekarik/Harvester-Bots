@@ -14,7 +14,6 @@ public class Base : MonoBehaviour
     private ScoreCounter _scoreCounter;
     private Statuses.BaseMode _mode;
     
-
     [field: SerializeField] public ResourceManager ResourceManager { get; private set; }
     [field: SerializeField] public int MaxUnitCount { get; private set; }
 
@@ -80,7 +79,7 @@ public class Base : MonoBehaviour
 
         foreach (var resource in resources)
         {
-            if (ResourceManager.TryAssignResource(unit, resource))
+            if (ResourceManager.TryAssignResource(resource))
             {
                 unit.AssignResource(resource);
                 return;
@@ -98,9 +97,16 @@ public class Base : MonoBehaviour
     {
         freeUnit = _unitList.Find(unit => unit.Status == Statuses.UnitStatuses.Free);
 
-        if (freeUnit != null)
-            return true;
+        return freeUnit != null;
+    }
 
-        return false;
+    public void AddUnit(Unit unit)
+    {
+        _unitList.Add(unit);
+    }
+
+    public void Reset()
+    {
+        MaxUnitCount = 0;
     }
 }

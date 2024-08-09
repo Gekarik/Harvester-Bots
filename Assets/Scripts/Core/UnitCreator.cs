@@ -16,7 +16,7 @@ public class UnitCreator : MonoBehaviour
 
     public Unit Create()
     {
-        var position = RandomPosition();
+        var position = GetRandomPosition();
         var unit = Instantiate(_unitPrefab, position, Quaternion.identity);
 
         unit.transform.SetParent(transform, true);
@@ -24,7 +24,7 @@ public class UnitCreator : MonoBehaviour
         return unit;
     }
 
-    private Vector3 RandomPosition()
+    private Vector3 GetRandomPosition()
     {
         Bounds bounds = _spawnArea.bounds;
 

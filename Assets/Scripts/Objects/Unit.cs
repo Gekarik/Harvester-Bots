@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(Animator))]
+[RequireComponent(typeof(Mover), typeof(Animator), typeof(BaseCreator))]
 public class Unit : MonoBehaviour
 {
     [SerializeField] private ResourceGrabber _grabber;
-    [SerializeField] private Base _basePrefab;
 
+    private BaseCreator _baseCreator;
     private Base _homeBase;
     private Mover _mover;
     private Animator _animator;
@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
+        _baseCreator = GetComponent<BaseCreator>();
         _mover = GetComponent<Mover>();
         _animator = GetComponent<Animator>();
     }
@@ -42,15 +43,14 @@ public class Unit : MonoBehaviour
     private IEnumerator Build(Flag flag)
     {
         Status = Statuses.UnitStatuses.Busy;
-        var homePlace = flag.transform.position;
 
         _animator.SetBool(AnimatorPlayerController.Params.Run, true);
-        yield return _mover.MoveToPosition(homePlace);
+        yield return _mover.MoveToPosition(flag.transform.position);
 
-        var home = Instantiate(_basePrefab, homePlace, Quaternion.identity);
-        home.Init(_homeBase.ResourceManager);
+        var home = _baseCreator.Create(flag, _homeBase.ResourceManager);
+        home.AddUnit(this);
         SetHome(home);
-        Destroy(flag.gameObject);
+
         Status = Statuses.UnitStatuses.Free;
     }
 
